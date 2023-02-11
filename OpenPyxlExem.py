@@ -12,3 +12,19 @@ c_mean = combustiveis_df['Valor de Venda'].groupby(by=combustiveis_df['Produto']
 display(c_mean)
 excel='por_litro.xlsx'
 c_mean.to_excel(excel, 'Sumario')
+
+#Vai abrir o Excel no openpyxl
+wb = load_workbook(excel) # wb = Workbook
+
+#Pegar a planilha certa... usando o Sheet Name (nome da planilha)
+ws = wb['Sumário'] # Work Sheet -> planilha atual, ativa, de trabalho
+
+#Vamos pintar o cabeçalho da tabela de "cinzinha"
+cinzinha = PatternFill("solid", fgColor="CCCCCC")
+coords = ['A1', 'B1']
+for coord in coords:
+  ws[coord].fill = cinzinha
+
+#Salvar o Excel
+wb.save(excel)
+
